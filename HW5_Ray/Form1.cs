@@ -16,5 +16,10 @@ namespace HW5_Ray
         {
             InitializeComponent();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Автор - Бурыгин Антон");
+        }
     }
 }
