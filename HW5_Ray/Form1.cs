@@ -21,5 +21,10 @@ namespace HW5_Ray
         {
             MessageBox.Show("Автор - Бурыгин Антон");
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
