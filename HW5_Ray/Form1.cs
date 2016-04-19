@@ -33,6 +33,26 @@ namespace HW5_Ray
             }
             return null;
         }
+        string FindElement (string elmemetToFind, TreeNode tn)
+        {
+            TreeNode newTN = null;
+            char elem = elmemetToFind[0];
+            if(tn != null)
+            {
+                if (Find(tn.Nodes, elem.ToString()) == null)
+                    return "";
+                else
+                    newTN = Find(tn.Nodes, elem.ToString());
+            }
+            else
+            {
+                if (Find(treeView1.Nodes, elem.ToString())==null)
+                    return "";
+                else
+                    newTN = Find(treeView1.Nodes, elem.ToString());
+            }
+            return elem.ToString() + FindElement(elmemetToFind.Remove(0, 1),newTN);
+        }
         void InsertElement(String str)
         {
             Insert(null ,str);
@@ -43,6 +63,14 @@ namespace HW5_Ray
             if (str.Length == 0)
                 return;
             char elem = str[0];
+            while (!char.IsLetter(elem))
+            {
+                str = str.Remove(0, 1);
+                if (str.Length == 0)
+                    return;
+                elem = str[0];
+            }
+
             if(tn != null)
             {
                 if (Find(tn.Nodes, elem.ToString()) == null)
@@ -52,7 +80,6 @@ namespace HW5_Ray
             }
             else
             {
-                
                 if (Find(treeView1.Nodes, elem.ToString())==null)
                     newTN = treeView1.Nodes.Add(elem.ToString());
                 else
@@ -85,7 +112,7 @@ namespace HW5_Ray
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 filePath = openFileDialog1.FileName;
-                textBox1.Text = filePath;
+                textBox2.Text = filePath;
                 dataFile = File.ReadAllText(filePath).Split(new char[] { ' ' });
                 foreach (var item in dataFile)
                 {
@@ -95,7 +122,8 @@ namespace HW5_Ray
         }
         private void button1_Click(object sender, EventArgs e)
         {
-
+            textBox3.Text = "Элемент с максимальным сходством : ";
+            textBox3.Text += FindElement(textBox1.Text, null);
         }
     }
 }
