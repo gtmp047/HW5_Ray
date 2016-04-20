@@ -16,6 +16,7 @@ namespace HW5_Ray
     public partial class Form1 : Form
     {
         string filePath = "";
+        Tree tr = new Tree();
        public class Node
         {
             public Char Value;
@@ -122,8 +123,26 @@ namespace HW5_Ray
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox3.Text = "Элемент с максимальным сходством : ";
-            textBox3.Text += FindElement(textBox1.Text, null);
+            textBox3.Text += "Лучевой поиск элемента " + textBox1.Text + Environment.NewLine;
+            textBox3.Text += "Элемент с максимальным сходством : ";
+            textBox3.Text += FindElement(textBox1.Text, null) + Environment.NewLine+Environment.NewLine;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox3.Text += "Бинарный поиск элемента " + textBox1.Text + Environment.NewLine;
+            tr.Add(textBox1.Text);
+            if (tr.isExist == true)
+            {
+                textBox3.Text += "Элемент " + textBox1.Text + "  уже существует" + Environment.NewLine + Environment.NewLine;
+            }
+            else
+            {
+                textBox3.Text += "Элемент " + textBox1.Text + "  был добавлен" + Environment.NewLine + Environment.NewLine;
+            }
+
+
+
         }
     }
 }

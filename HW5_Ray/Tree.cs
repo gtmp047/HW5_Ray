@@ -6,42 +6,55 @@ using System.Threading.Tasks;
 
 namespace HW5_Ray
 {
-   /* class Tree
+    class Tree
     {
-        List<TreeNode> root = new List<TreeNode>();
-        public void InsertElement(String str)
+        public class TreeNode
         {
-            Insert(str);
+            public TreeNode Left;
+            public TreeNode Right;
         }
-
-        public int Find(List<TreeNode> arr, char c)
+        public TreeNode Node = new TreeNode();
+        public bool isExist = false;
+        string GetByteFromString(String str)
         {
-            for (int i = 0; i < arr.Count; i++)
+            string tmp = "";
+            for (int i = 0; i < str.Length; i++)
             {
-                if (arr[i].Value.CompareTo(c) == 0)
+                for (int y = 0; y < 8; y++)
                 {
-                    return i;
+                    tmp += (str[i] >> y & 1).ToString();
                 }
             }
-            return -1;
+            return tmp;
         }
-        void Insert(String str)
+        public void Add(String str)
         {
-            while (str.Length != 0)
-            {
-                char elem = str[0];
-                if (tr.Count == 0) // нет ни одного элемента
-                {
-                    root.Add(new TreeNode(elem));
-                }
-                else
-                {
-                    if (Find(root, elem) == -1)
-                        root.Add(new TreeNode(elem));
-                }
-                node = node.arr[Find(node.arr, elem)];
-                str = str.Remove(0, 1);
-            }        
+            isExist = true;
+            AddRecursion(ref Node, GetByteFromString(str));
         }
-    */
+        private void AddRecursion(ref TreeNode node, String val)
+        {
+            if (val.Length == 0)
+                return;
+            Char elem = val[0]; 
+            if (elem.CompareTo('0') == 0) // есть такой уже элемент уже;
+            {
+                if(node.Left == null)
+                {
+                    isExist = false;
+                    node.Left = new TreeNode();
+                }
+                AddRecursion(ref node.Left, val.Remove(0,1));
+            }
+            else
+            {
+                if (node.Right == null)
+                {
+                    isExist = false;
+                    node.Right = new TreeNode();
+                }
+                AddRecursion(ref node.Right, val.Remove(0, 1));
+            }
+        }
+    }
 }
